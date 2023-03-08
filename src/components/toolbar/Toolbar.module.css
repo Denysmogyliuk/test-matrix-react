@@ -1,0 +1,21 @@
+.header {
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+    gap: 30px;
+    margin-bottom: 34px;
+}
+
+.widthToolbar {
+    display: flex;
+    gap: 10px;
+    justify-content: space-between;
+    align-items: end;
+}
+
+.highlightsToolbar {
+    display: flex;
+    gap: 10px;
+    justify-content: space-between;
+    align-items: end;
+}

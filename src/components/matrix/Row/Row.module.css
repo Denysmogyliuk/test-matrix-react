@@ -1,0 +1,19 @@
+.row {
+    display: flex;
+    gap: 10px;
+}
+
+.removeButton {
+    height: 50px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    color: rgb(255, 85, 0);
+    font-weight: 700;
+}
+
+.removeButton:hover {
+    transition: 0.2s ease;
+    transform: scale(1.4);
+    color: rgb(255, 38, 0);
+}

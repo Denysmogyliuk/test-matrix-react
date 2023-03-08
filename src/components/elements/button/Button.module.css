@@ -1,0 +1,20 @@
+.button {
+    box-sizing: border-box;
+    height: 36px;
+    width: 150px;
+    background-color: rgb(71, 71, 71);
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    text-transform: uppercase;
+    transition: 0.2s ease;
+    cursor: pointer;
+}
+
+.button:hover {
+    background-color: rgb(97, 97, 97);
+}
+
+.button:active {
+    background-color: rgb(71, 71, 71);
+}
