@@ -1,9 +1,7 @@
-import { CellType } from "../matrix/types";
+import { GetCellType } from "./types";
 import { getRandomId } from "./getRandomId";
 
-
-
-export const getCell = (): CellType => {
+export const getCell = (): GetCellType => {
     const amount = Math.floor(100 + Math.random() * 900);
     const id = getRandomId();
 

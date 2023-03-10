@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { InputPropsType } from "../../../app/matrix/types";
+import { InputPropsType } from "../../types";
 import styles from "./Input.module.css"
 
 const Input: FC<InputPropsType> = ({ name, onChange, value, placeholder, max }) => {

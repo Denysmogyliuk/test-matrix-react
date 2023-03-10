@@ -1,4 +1,4 @@
-import { RowType } from "../matrix/types"
+import { RowType } from "./types"
 import { getRandomId } from "./getRandomId"
 import { getCell } from "./getCell"
 
@@ -7,7 +7,6 @@ export const getRow = (width: number): RowType => {
         row: [],
         id: getRandomId()
     }
-
 
     for (let i = 0; i < width; i++) {
         Row.row.push(getCell())

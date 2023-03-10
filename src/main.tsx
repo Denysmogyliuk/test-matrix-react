@@ -1,17 +1,13 @@
-import React, { createContext } from 'react'
+import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App'
-import { getMatrix } from './app/utils/getMatrix'
-import { Context } from './components/context'
+import { MatrixContextProvider } from './context/MatrixContext';
 import './index.css'
-
-const array = getMatrix({ width: 8, height: 12 })
-console.log(array)
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-    <Context.Provider value={array}>
+    <MatrixContextProvider>
       <App />
-    </Context.Provider>
+    </MatrixContextProvider>
   </React.StrictMode>,
 )

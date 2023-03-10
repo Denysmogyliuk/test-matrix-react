@@ -1,4 +1,4 @@
-import { MatrixType } from "../matrix/types"
+import { MatrixType } from "./types"
 
 export const getAverage = (matrix: MatrixType): number[] => {
     const arrAverage: number[] = []

@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { CardAverageType } from "../../../app/matrix/types";
+import { CardAverageType } from "../../types";
 import style from './Card.module.css'
 
 const CardAverage: FC<CardAverageType> = ({ number }) => {

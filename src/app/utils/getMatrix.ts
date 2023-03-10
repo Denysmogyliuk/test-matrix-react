@@ -1,7 +1,5 @@
-import { MatrixType, SizeState } from "../matrix/types";
+import { MatrixType, SizeState } from "./types";
 import { getRow } from "./getRow";
-
-
 
 export const getMatrix = ({ width, height }: SizeState): MatrixType => {
     let counterHeight = 0;
@@ -13,6 +11,6 @@ export const getMatrix = ({ width, height }: SizeState): MatrixType => {
         matrix.push(row)
         counterHeight += 1
     }
-
+    console.log(matrix)
     return matrix
 }

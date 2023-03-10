@@ -1,16 +1,24 @@
-import { FC } from "react";
-import { CellType } from "../../../app/matrix/types";
+import { FC, useEffect, useState } from "react";
+import { useMatrixContext } from "../../../context/MatrixContext";
+import { CardType } from "../../types";
 import style from './Card.module.css'
 
-const Card: FC<CellType> = ({ id, amount }) => {
+const Card: FC<CardType> = ({ amount, rowIndex, columnIndex, id }) => {
+    const { setIncrement, installHighlights, highlights } = useMatrixContext()
+    const [isHighlight, setIsHighlight] = useState<boolean>(false)
 
-    const isHighlight = false;
 
-    const handleIncrement = () => { console.log(id) }
+    const handleIncrement = () => { setIncrement(rowIndex, columnIndex, 1) }
 
-    const handleEnter = () => { console.log(id) }
+    const handleEnter = () => { installHighlights(id, true) }
 
-    const handleLeave = () => { console.log(id) }
+    const handleLeave = () => { installHighlights(id, false) }
+
+    useEffect(() => {
+        highlights.includes(id)
+            ? setIsHighlight(true)
+            : setIsHighlight(false)
+    }, [id, highlights])
 
     return <button
         className={isHighlight ? [style.card, style.cardHighlight].join(" ") : style.card}

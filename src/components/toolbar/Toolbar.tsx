@@ -1,5 +1,6 @@
-import { FC, useState } from "react";
-import { SizeState } from "../../app/matrix/types";
+import { FC, useEffect, useState } from "react";
+import { SizeState } from "../../app/utils/types";
+import { useMatrixContext } from "../../context/MatrixContext";
 import Button from "../elements/button/Button";
 import Input from "../elements/input/Input";
 import styles from "./Toolbar.module.css"
@@ -7,30 +8,32 @@ import styles from "./Toolbar.module.css"
 const MAX_SIZE = 100;
 
 const Toolbar: FC = () => {
+    const { addRow, createMatrix } = useMatrixContext()
     const [{ height, width }, setSize] = useState<SizeState>({ height: 0, width: 0 })
-    const [highlightsValue, setHighlightsValue] = useState(0)
-
-    console.log(highlightsValue)
+    const [highlightsValue, setHighlightsValue] = useState<number>(0)
 
     const handleSize = (name: string, number: number) => {
         const validNumber = Math.max(0, Math.min(MAX_SIZE, Number(number)));
         setSize(state => ({ ...state, [name]: validNumber }))
     }
 
-    //this is max value of showing elements
-    const maxHighlights = 20;
-
     const handleHighlight = (name: string, number: number) => {
-        setHighlightsValue(number)
-        const validNumber = Math.max(0, Math.min(maxHighlights, Number(number)));
+        const highlights = height * width - 1 < 0 ? 0 : height * width - 1;
+        const validNumber = Math.max(0, Math.min(highlights, Number(number)));
         setHighlightsValue(state => (validNumber))
     }
 
-    const handleAddRow = () => { console.log("add row") }
-    const handleCreateMatrix = () => { console.log("create matrix") }
+    const handleAddRow = () => { addRow(width) }
 
-    //true after init matrix
-    const showHighlights = true;
+    const handleCreateMatrix = () => {
+        if (height && width) {
+            createMatrix(width, height)
+        }
+    }
+
+    useEffect(() => {
+        setHighlightsValue(highlightsValue)
+    }, [highlightsValue])
 
     return (
         <header className={styles.header}>
@@ -39,12 +42,12 @@ const Toolbar: FC = () => {
                 <Input name="width" value={width} onChange={handleSize}></Input>
                 <Button onClick={handleCreateMatrix} title="create!"></Button>
             </div>
-            {showHighlights && (
+            {height && width ? (
                 <div className={styles.highlightsToolbar}>
                     <Input name="highlight" value={highlightsValue} onChange={handleHighlight}></Input>
                     <Button onClick={handleAddRow} title="add row"></Button>
                 </div>
-            )}
+            ) : null}
 
         </header >
     )

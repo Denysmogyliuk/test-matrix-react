@@ -1,20 +1,20 @@
-import { FC, useContext } from "react";
-import { MatrixType, RowType } from "../../app/matrix/types";
-import { Context } from "../context";
+import { FC } from "react";
 import Row from "./Row/Row";
 import RowAverage from "./Row/RowAverage";
 import style from './Matrix.module.css'
+import { RowType } from "../../app/utils/types";
+import { useMatrixContext } from "../../context/MatrixContext";
 
 const Matrix: FC = () => {
 
-    const array = useContext<MatrixType>(Context)
+    const { matrix } = useMatrixContext()
 
     return (
         <>
             <ul className={style.column}>
-                {array.map((item: RowType) => {
+                {matrix.map((item: RowType, index: number) => {
                     return <li className={style.row} key={item.id}>
-                        <Row id={item.id} row={item.row} />
+                        <Row rowIndex={index} row={item.row} />
                     </li>
                 })}
                 <RowAverage />

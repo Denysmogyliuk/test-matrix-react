@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { CardTotalType } from "../../../app/matrix/types";
+import { CardTotalType } from "../../types";
 import style from './Card.module.css'
 
 const CardTotal: FC<CardTotalType> = ({ number, enter, leave }) => {

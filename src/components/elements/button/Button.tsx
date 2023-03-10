@@ -1,5 +1,5 @@
 import { FC } from "react"
-import { ButtonPropsType } from "../../../app/matrix/types"
+import { ButtonPropsType } from "../../types";
 import styles from "./Button.module.css"
 
 const Button: FC<ButtonPropsType> = ({ title, onClick, disabled }) => {
