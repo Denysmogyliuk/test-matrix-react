@@ -1,10 +1,3 @@
-// export type CellType = {
-//     amount: number,
-//     id: number,
-//     rowIndex: number,
-//     columnIndex: number
-// }
-
 export interface RowType {
     row: GetCellType[],
     id: number

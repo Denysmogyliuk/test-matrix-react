@@ -22,25 +22,25 @@ const Row: FC<RowElemIndex> = ({ row, rowIndex }) => {
 
     const handleRemoveRow = () => { deleteRow(rowIndex) }
 
-    const lineTotal = getRowTotal(row)
-    const linePercent = row.map((number) => (number.amount / lineTotal * 100).toFixed(1))
+    const rowTotal = getRowTotal(row)
+    const rowPercent = row.map((number) => (number.amount / rowTotal * 100).toFixed(1))
 
     return (
         <>
-            <ul className={style.row}>
+            <ul className={showPercent ? [style.row, style.rowPercent].join(" ") : style.row}>
 
                 {!showPercent ?
                     row.map((item: any, index) =>
                         <li key={item.id}>
                             <Card id={item.id} rowIndex={rowIndex} columnIndex={index} amount={item.amount} />
                         </li>) :
-                    linePercent.map((item: any, index) =>
+                    rowPercent.map((item: any, index) =>
                         <li key={index}>
                             <CardPercent amount={item} />
                         </li>)
                 }
 
-                <CardTotal enter={handleShowPercent} leave={handleClosePercent} number={lineTotal} />
+                <CardTotal enter={handleShowPercent} leave={handleClosePercent} number={rowTotal} />
                 <li>
                     <button className={style.removeButton} onClick={handleRemoveRow}>X</button>
                 </li>

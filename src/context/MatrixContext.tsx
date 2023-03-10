@@ -1,32 +1,23 @@
-import { createContext, Dispatch, FC, ReactNode, SetStateAction, useContext, useMemo, useState } from "react";
+import { createContext, FC, ReactNode, useContext, useEffect, useMemo, useState } from "react";
 import { MatrixType } from "../app/utils/types";
 import { getMatrix } from "../app/utils/getMatrix";
 import { getRow } from "../app/utils/getRow";
 import { getSortedMatrix } from "../app/utils/getSortedMatrix";
 import { getHighlights } from "../app/utils/getHighlights";
+import { MatrixContextType } from "./types";
 
 type Props = { children: ReactNode }
 
-interface MatrixContextType {
-    matrix: MatrixType,
-    setIncrement: (rowIndex: number, columnIndex: number, increment: number) => void,
-    matrixIsOpen: boolean,
-    setMatrixIsOpen: Dispatch<SetStateAction<boolean>>,
-    addRow: (width: number) => void,
-    deleteRow: (rowIndex: number) => void,
-    installHighlights: any
-    highlights: number[],
-    createMatrix: any
-}
+const MatriInitialContext = {}
 
-export const MatrixContext = createContext<MatrixContextType>({});
+export const MatrixContext = createContext<MatrixContextType>(MatriInitialContext);
 
 export const MatrixContextProvider: FC<Props> = (props) => {
     const { children } = props;
 
     const [matrix, setMatrix] = useState<MatrixType>([])
-    const [matrixIsOpen, setMatrixIsOpen] = useState<boolean>(true)
-    const [highlights, setHighlights] = useState<number[]>([])
+    const [highlightsArray, setHighlightsArray] = useState<number[]>([])
+    const [highlightsValue, setHighlightsValue] = useState<number>(0);
 
     const setIncrement = (rowIndex: number, columnIndex: number, increment: number) => {
         setMatrix((state) => {
@@ -37,11 +28,8 @@ export const MatrixContextProvider: FC<Props> = (props) => {
     }
 
     const createMatrix = (width: number, height: number) => {
-        if (width === 0 && height === 0) {
-            setMatrix([])
-            return null
-        }
-        setMatrix(() => getMatrix({ width: width, height: height }))
+        console.log(width, height, "HUI")
+        width < 1 || height < 1 ? setMatrix([]) : setMatrix(() => getMatrix(width, height))
     }
 
     const addRow = (width: number) => {
@@ -63,12 +51,24 @@ export const MatrixContextProvider: FC<Props> = (props) => {
     const sorted = getSortedMatrix(matrix)
 
     const installHighlights = (id: number, state: boolean) => {
-        state ? setHighlights(getHighlights(1, id, sorted)) : setHighlights([])
+        state ? setHighlightsArray(getHighlights(highlightsValue, id, sorted)) : setHighlightsArray([])
     }
 
     // const value = useMemo(() => ({ state, setState }), [state])
 
-    return <MatrixContext.Provider value={{ matrix, setIncrement, matrixIsOpen, setMatrixIsOpen, addRow, deleteRow, installHighlights, highlights, createMatrix }}> {children}</MatrixContext.Provider >
+    return <MatrixContext.Provider value={{
+        matrix,
+        setIncrement,
+        addRow,
+        deleteRow,
+        installHighlights,
+        highlightsArray,
+        createMatrix,
+        setHighlightsValue,
+        highlightsValue
+    }}>
+        {children}
+    </MatrixContext.Provider >
 }
 
 export const useMatrixContext = () => useContext(MatrixContext)

@@ -4,9 +4,8 @@ import { CardType } from "../../types";
 import style from './Card.module.css'
 
 const Card: FC<CardType> = ({ amount, rowIndex, columnIndex, id }) => {
-    const { setIncrement, installHighlights, highlights } = useMatrixContext()
+    const { setIncrement, installHighlights, highlightsArray } = useMatrixContext()
     const [isHighlight, setIsHighlight] = useState<boolean>(false)
-
 
     const handleIncrement = () => { setIncrement(rowIndex, columnIndex, 1) }
 
@@ -15,10 +14,10 @@ const Card: FC<CardType> = ({ amount, rowIndex, columnIndex, id }) => {
     const handleLeave = () => { installHighlights(id, false) }
 
     useEffect(() => {
-        highlights.includes(id)
+        highlightsArray.includes(id)
             ? setIsHighlight(true)
             : setIsHighlight(false)
-    }, [id, highlights])
+    }, [id, highlightsArray])
 
     return <button
         className={isHighlight ? [style.card, style.cardHighlight].join(" ") : style.card}
