@@ -14,9 +14,8 @@ export interface ButtonPropsType {
 export interface InputPropsType {
     name: string;
     onChange: (name: string, number: number) => void;
-    placeholder?: string,
     value: number,
-    max?: number
+    placeholder?: string,
 }
 
 export type CardType = {

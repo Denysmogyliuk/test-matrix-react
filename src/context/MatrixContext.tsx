@@ -1,18 +1,17 @@
-import { createContext, FC, ReactNode, useContext, useEffect, useMemo, useState } from "react";
+import { createContext, FC, useContext, useMemo, useState } from "react";
 import { MatrixType } from "../app/utils/types";
 import { getMatrix } from "../app/utils/getMatrix";
 import { getRow } from "../app/utils/getRow";
 import { getSortedMatrix } from "../app/utils/getSortedMatrix";
 import { getHighlights } from "../app/utils/getHighlights";
-import { MatrixContextType } from "./types";
+import { MatrixContextProviderProps, MatrixContextType } from "./types";
 
-type Props = { children: ReactNode }
 
 const MatriInitialContext = {}
 
 export const MatrixContext = createContext<MatrixContextType>(MatriInitialContext);
 
-export const MatrixContextProvider: FC<Props> = (props) => {
+export const MatrixContextProvider: FC<MatrixContextProviderProps> = (props) => {
     const { children } = props;
 
     const [matrix, setMatrix] = useState<MatrixType>([])
@@ -28,7 +27,6 @@ export const MatrixContextProvider: FC<Props> = (props) => {
     }
 
     const createMatrix = (width: number, height: number) => {
-        console.log(width, height, "HUI")
         width < 1 || height < 1 ? setMatrix([]) : setMatrix(() => getMatrix(width, height))
     }
 

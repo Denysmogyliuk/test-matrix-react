@@ -3,11 +3,13 @@ import { useMatrixContext } from "../../../context/MatrixContext";
 import { CardType } from "../../types";
 import style from './Card.module.css'
 
+const INCREMENT = 1;
+
 const Card: FC<CardType> = ({ amount, rowIndex, columnIndex, id }) => {
     const { setIncrement, installHighlights, highlightsArray } = useMatrixContext()
     const [isHighlight, setIsHighlight] = useState<boolean>(false)
 
-    const handleIncrement = () => { setIncrement(rowIndex, columnIndex, 1) }
+    const handleIncrement = () => { setIncrement(rowIndex, columnIndex, INCREMENT) }
 
     const handleEnter = () => { installHighlights(id, true) }
 

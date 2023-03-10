@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { SizeState } from "../../app/utils/types";
 import { useMatrixContext } from "../../context/MatrixContext";
 import Button from "../elements/button/Button";
@@ -10,15 +10,15 @@ const MAX_SIZE = 100;
 const Toolbar: FC = () => {
     const { addRow, createMatrix, highlightsValue, setHighlightsValue, matrix } = useMatrixContext()
     const [{ height, width }, setSize] = useState<SizeState>({ height: 0, width: 0 })
+    const [limitHighlights, setLimitHighlights] = useState<number>(0)
 
-    const handleSize = (name: string, number: number) => {
-        const validNumber = Math.max(0, Math.min(MAX_SIZE, Number(number)));
+    const handleSize = (name: string, value: number) => {
+        const validNumber = Math.max(0, Math.min(MAX_SIZE, Number(value)));
         setSize(state => ({ ...state, [name]: validNumber }))
     }
 
-    const handleHighlight = (name: string, number: number) => {
-        const maxHighlights = height > 0 || width > 0 ? height * width - 1 : 0;
-        const validNumber = Math.max(0, Math.min(maxHighlights, Number(number)));
+    const handleHighlight = (name: string, value: number) => {
+        const validNumber = Math.max(0, Math.min(limitHighlights, Number(value)));
         setHighlightsValue(() => (validNumber))
     }
 
@@ -29,6 +29,15 @@ const Toolbar: FC = () => {
     const handleCreateMatrix = () => {
         createMatrix(width, height)
     }
+
+    useEffect(() => {
+        setSize({ height: matrix.length, width: matrix.length && matrix[0].row.length })
+        setLimitHighlights(matrix.length && matrix.length * matrix[0].row.length - 1)
+    }, [matrix])
+
+    useEffect(() => {
+        setHighlightsValue((value) => value > limitHighlights ? limitHighlights : value)
+    }, [limitHighlights, setHighlightsValue])
 
     return (
         <header className={styles.header}>

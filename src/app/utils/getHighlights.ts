@@ -3,9 +3,9 @@ import { GetCellType } from "./types"
 export const getHighlights = (highlight: number, id: number, arr: GetCellType[]): number[] => {
 
 
-    const arrHighlightsId: number[] = []
+    const arrayFromId: number[] = []
 
-    if (highlight === 0 || arr.length === 0) return arrHighlightsId
+    if (highlight === 0 || arr.length === 0) return arrayFromId
 
     const index = arr.findIndex(number => number.id === id)
     const number = arr[index].amount
@@ -13,23 +13,23 @@ export const getHighlights = (highlight: number, id: number, arr: GetCellType[])
     let afterIndex: number = index + 1;
     let beforeIndex: number = index - 1
 
-    while (arrHighlightsId.length !== highlight) {
+    while (arrayFromId.length !== highlight) {
 
         const afterNum = arr[afterIndex]
         const beforeNum = arr[beforeIndex]
 
         if (!afterNum) {
-            arrHighlightsId.push(beforeNum.id)
+            arrayFromId.push(beforeNum.id)
             beforeIndex -= 1
         } else if (!beforeNum) {
-            arrHighlightsId.push(afterNum.id)
+            arrayFromId.push(afterNum.id)
             afterIndex += 1
         } else {
 
-            number - beforeNum.amount < afterNum.amount - number ? arrHighlightsId.push(beforeNum.id) : arrHighlightsId.push(afterNum.id)
+            number - beforeNum.amount < afterNum.amount - number ? arrayFromId.push(beforeNum.id) : arrayFromId.push(afterNum.id)
 
             number - beforeNum.amount < afterNum.amount - number ? beforeIndex-- : afterIndex++
         }
     }
-    return arrHighlightsId
+    return arrayFromId
 }

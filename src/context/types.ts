@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction } from "react"
+import { Dispatch, ReactNode, SetStateAction } from "react"
 import { MatrixType } from "../app/utils/types"
 
 export interface MatrixContextType {
@@ -12,3 +12,5 @@ export interface MatrixContextType {
     setHighlightsValue: Dispatch<SetStateAction<number>>,
     highlightsValue: number
 }
+
+export type MatrixContextProviderProps = { children: ReactNode }
