@@ -12,24 +12,22 @@
 
 .removeButton {
     display: block;
+    padding: 12px;
+
     box-sizing: border-box;
-    height: 50px;
-    width: 50px;
     background-color: transparent;
     border: none;
     cursor: pointer;
-    color: rgb(255, 85, 0);
+    color: rgb(255, 0, 0);
     font-weight: 700;
 }
 
 .removeButton:hover {
     transition: 0.2s ease;
-    transform: scale(1.4);
-    color: rgb(255, 38, 0);
+    color: rgb(254, 95, 67);
 }
 
 .removeButton:active {
     transition: 0.1s ease;
-    transform: scale(0.6);
     color: rgb(255, 93, 65);
 }

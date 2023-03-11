@@ -34,13 +34,13 @@ export const MatrixContextProvider: FC<MatrixContextProviderProps> = (props) => 
             const newState = [...state];
 
             newState[rowIndex].row[columnIndex] = { id: col.id, amount }
-            return newState
+            return newState;
         })
     }
 
     const createMatrix = (width: number, height: number) => {
         if (width < 1 || height < 1) {
-            return setMatrix([])
+            return setMatrix([]);
         }
 
         return setMatrix(() => getMatrix(width, height))
@@ -49,7 +49,7 @@ export const MatrixContextProvider: FC<MatrixContextProviderProps> = (props) => 
     const addRow = (width: number) => {
         setMatrix((state) => {
             const row = generateRow(width);
-            return [...state, row]
+            return [...state, row];
         })
     }
 
@@ -61,18 +61,18 @@ export const MatrixContextProvider: FC<MatrixContextProviderProps> = (props) => 
 
     const installHighlights = (id: number, state: boolean) => {
         if (!state) {
-            setHighlightsArray([])
+            setHighlightsArray([]);
             return
         }
 
         if (highlightsValue === 0 || sorted.length === 0) {
-            setHighlightsArray([])
+            setHighlightsArray([]);
             return
         }
 
         const toHightLight = getHighlights(highlightsValue, id, sorted);
 
-        setHighlightsArray(toHightLight)
+        setHighlightsArray(toHightLight);
     }
 
     return <MatrixContext.Provider value={{
@@ -90,4 +90,4 @@ export const MatrixContextProvider: FC<MatrixContextProviderProps> = (props) => 
     </MatrixContext.Provider >
 }
 
-export const useMatrixContext = () => useContext(MatrixContext)
+export const useMatrixContext = () => useContext(MatrixContext);
