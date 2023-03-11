@@ -6,8 +6,7 @@ import { RowType } from "../../app/utils/types";
 import { useMatrixContext } from "../../context/MatrixContext";
 
 const Matrix: FC = () => {
-
-    const { matrix } = useMatrixContext()
+    const { matrix } = useMatrixContext();
 
     return (
         <>

@@ -11,8 +11,10 @@
 }
 
 .removeButton {
+    display: block;
+    box-sizing: border-box;
     height: 50px;
-    width: 20px;
+    width: 50px;
     background-color: transparent;
     border: none;
     cursor: pointer;

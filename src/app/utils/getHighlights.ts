@@ -1,35 +1,29 @@
-import { GetCellType } from "./types"
+import { Cell } from "./types"
 
-export const getHighlights = (highlight: number, id: number, arr: GetCellType[]): number[] => {
-
-
+export const getHighlights = (highlight: number, id: number, filteredArr: Cell[]): number[] => {
     const arrayFromId: number[] = []
-
-    if (highlight === 0 || arr.length === 0) return arrayFromId
-
-    const index = arr.findIndex(number => number.id === id)
-    const number = arr[index].amount
+    const index = filteredArr.findIndex(cell => cell.id === id)
+    const amount = filteredArr[index].amount
 
     let afterIndex: number = index + 1;
-    let beforeIndex: number = index - 1
+    let beforeIndex: number = index - 1;
 
     while (arrayFromId.length !== highlight) {
 
-        const afterNum = arr[afterIndex]
-        const beforeNum = arr[beforeIndex]
+        const nextValue = filteredArr[afterIndex];
+        const previousValue = filteredArr[beforeIndex];
 
-        if (!afterNum) {
-            arrayFromId.push(beforeNum.id)
-            beforeIndex -= 1
-        } else if (!beforeNum) {
-            arrayFromId.push(afterNum.id)
-            afterIndex += 1
+        if (!nextValue) {
+            arrayFromId.push(previousValue.id);
+            beforeIndex -= 1;
+        } else if (!previousValue) {
+            arrayFromId.push(nextValue.id);
+            afterIndex += 1;
         } else {
-
-            number - beforeNum.amount < afterNum.amount - number ? arrayFromId.push(beforeNum.id) : arrayFromId.push(afterNum.id)
-
-            number - beforeNum.amount < afterNum.amount - number ? beforeIndex-- : afterIndex++
+            const amountDiff = amount - previousValue.amount < nextValue.amount - amount;
+            amountDiff ? arrayFromId.push(previousValue.id) : arrayFromId.push(nextValue.id);
+            amountDiff ? beforeIndex-- : afterIndex++;
         }
     }
-    return arrayFromId
+    return arrayFromId;
 }

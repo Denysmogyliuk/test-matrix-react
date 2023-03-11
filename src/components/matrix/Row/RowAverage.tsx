@@ -6,9 +6,9 @@ import styles from "./Row.module.css"
 
 
 const RowAverage: FC = () => {
-    const { matrix } = useMatrixContext()
+    const { matrix } = useMatrixContext();
 
-    const average = getAverage(matrix)
+    const average = getAverage(matrix);
 
     return <ul className={styles.row}>
         {average.map((item, index) =>

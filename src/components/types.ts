@@ -44,7 +44,7 @@ export interface GetCellType {
     id: number
 }
 
-export interface RowElemIndex {
+export interface RowElemIndexType {
     row: GetCellType[],
     rowIndex: number
 }

@@ -1,3 +1,3 @@
-import { GetCellType } from "./types";
+import { Cell } from "./types";
 
-export const getRowTotal = (arr: GetCellType[]): number => arr.reduce((acc, number) => acc + number.amount, 0)
+export const getRowTotal = (arr: Cell[]): number => arr.reduce((acc, number) => acc + number.amount, 0);

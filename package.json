@@ -9,7 +9,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "eslint-config-prettier": "^8.7.0",
     "nanoid": "^4.0.1",
+    "prettier": "^2.8.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "uuid": "^9.0.0"

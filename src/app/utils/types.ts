@@ -1,5 +1,10 @@
+export interface Cell {
+    amount: number,
+    id: number
+}
+
 export interface RowType {
-    row: GetCellType[],
+    row: Cell[],
     id: number
 }
 
@@ -15,19 +20,13 @@ export interface NumberType {
     id: number
 }
 
-export
-    interface HighlightType {
+export interface HighlightType {
     highlight: number,
     id: number
     arr: Number[]
 }
 
-export interface StateSizeType {
+export interface StateSize {
     height: number,
     width: number
-}
-
-export interface GetCellType {
-    amount: number,
-    id: number
 }

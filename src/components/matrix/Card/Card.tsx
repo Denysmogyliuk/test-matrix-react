@@ -6,8 +6,8 @@ import style from './Card.module.css'
 const INCREMENT = 1;
 
 const Card: FC<CardType> = ({ amount, rowIndex, columnIndex, id }) => {
-    const { setIncrement, installHighlights, highlightsArray } = useMatrixContext()
-    const [isHighlight, setIsHighlight] = useState<boolean>(false)
+    const { setIncrement, installHighlights, highlightsArray } = useMatrixContext();
+    const [isHighlight, setIsHighlight] = useState<boolean>(false);
 
     const handleIncrement = () => { setIncrement(rowIndex, columnIndex, INCREMENT) }
 
@@ -19,7 +19,7 @@ const Card: FC<CardType> = ({ amount, rowIndex, columnIndex, id }) => {
         highlightsArray.includes(id)
             ? setIsHighlight(true)
             : setIsHighlight(false)
-    }, [id, highlightsArray])
+    }, [id, highlightsArray]);
 
     return <button
         className={isHighlight ? [style.card, style.cardHighlight].join(" ") : style.card}

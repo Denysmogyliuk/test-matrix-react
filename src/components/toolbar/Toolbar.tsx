@@ -8,9 +8,9 @@ import styles from "./Toolbar.module.css"
 const MAX_SIZE = 100;
 
 const Toolbar: FC = () => {
-    const { addRow, createMatrix, highlightsValue, setHighlightsValue, matrix } = useMatrixContext()
-    const [{ height, width }, setSize] = useState<SizeState>({ height: 0, width: 0 })
-    const [limitHighlights, setLimitHighlights] = useState<number>(0)
+    const { addRow, createMatrix, highlightsValue, setHighlightsValue, matrix } = useMatrixContext();
+    const [{ height, width }, setSize] = useState<SizeState>({ height: 0, width: 0 });
+    const [limitHighlights, setLimitHighlights] = useState<number>(0);
 
     const handleSize = (name: string, value: number) => {
         const validNumber = Math.max(0, Math.min(MAX_SIZE, Number(value)));
@@ -33,11 +33,11 @@ const Toolbar: FC = () => {
     useEffect(() => {
         setSize({ height: matrix.length, width: matrix.length && matrix[0].row.length })
         setLimitHighlights(matrix.length && matrix.length * matrix[0].row.length - 1)
-    }, [matrix])
+    }, [matrix]);
 
     useEffect(() => {
         setHighlightsValue((value) => value > limitHighlights ? limitHighlights : value)
-    }, [limitHighlights, setHighlightsValue])
+    }, [limitHighlights, setHighlightsValue]);
 
     return (
         <header className={styles.header}>
