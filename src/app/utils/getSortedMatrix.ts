@@ -1,3 +1,4 @@
-import { MatrixType } from "./types";
+import { MatrixType, RowType } from "./types";
 
-export const getSortedMatrix = (matrix: MatrixType) => matrix.flatMap((row: any) => row.row).sort((a, b) => a.amount - b.amount);
+export const getSortedMatrix = (matrix: MatrixType) =>
+  matrix.flatMap((row: RowType) => row.row).sort((a, b) => a.amount - b.amount);
